@@ -7,7 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         redLight: {
-            turnedOn: false,
+            turnedOn: true,
             baseDuration: 10,
         },
         yellowLight: {
@@ -54,8 +54,12 @@ export default new Vuex.Store({
 
     },
     getters: {
-        allState(state) {
-            return state
+
+        lightStatus: state => light => {
+            return state[light].turnedOn;
+        },
+        duration: state => light => {
+            return state[light].baseDuration;
         }
     }
 })

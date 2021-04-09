@@ -1,8 +1,5 @@
 <template>
-    <div 
-    class = "round green" 
-    :class = "{'red': red, 'red-off': !red, 'yellow': yellow, 'yellow-off': !yellow, 'green': green, 'green-off': !green }"
-    > {{ timer }}</div>
+    <div class = "round" />
 </template>
 
 <script>
@@ -12,13 +9,16 @@ export default {
 </script>
 
 <style> 
-    .round {
-  width: 15em;
-  height: 15em;
+.round {
+  width: 10em;
+  height: 10em;
   border-radius: 50%;
-  border: black;
-  line-height: 15em;  /* подробнее про line-height */
+  line-height: 10em;  /* подробнее про line-height */
   text-align: center;  /* выравнять текст по середине по горизонтали */
+}
+
+.containter {
+ border: black solid 2px;
 }
 
 .red {

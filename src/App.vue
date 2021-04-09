@@ -5,16 +5,11 @@
 </template>
 
 <script>
-
-import {mapGetters} from 'vuex'
-
 export default {
   name: 'App',
-  computed: mapGetters(["allState"]),    
-  //   allState() {
-  //     return this.$store.getters.allState;
-  //   }
-  // }
+  mounted () {
+    // this.$router.push("/red")
+  },
   methods: {
     timer(duration, remainder) {
       remainder = duration;
