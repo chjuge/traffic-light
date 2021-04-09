@@ -1,5 +1,9 @@
 <template>
+    <div>
     <base-light />
+    <base-light />
+    <base-light />
+    </div>
 </template>
 
 <script>
@@ -15,11 +19,3 @@ export default {
 }
 </script>
 
-<style scoped> 
-.green {
-  background: rgba(0,255,0,1);
-}
-.green-off {
-  background: rgba(0,255,0,.5);
-}
-</style>

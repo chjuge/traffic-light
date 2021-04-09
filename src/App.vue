@@ -1,23 +1,32 @@
 <template>
   <div id="app">
-    <Red />
-    <Yellow />
-    <Green />
+    <router-view />
   </div>
 </template>
 
 <script>
-import Green from './components/Green.vue'
-import Red from './components/Red.vue'
-import Yellow from './components/Yellow.vue'
 
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'App',
-  components: {
-    Red,
-    Yellow,
-    Green
+  computed: mapGetters(["allState"]),    
+  //   allState() {
+  //     return this.$store.getters.allState;
+  //   }
+  // }
+  methods: {
+    timer(duration, remainder) {
+      remainder = duration;
+      
+      setTimeout(function tick() {
+        if (remainder > 0) {
+          // console.log(remainder);
+          setTimeout(tick, 1000);
+        }
+        remainder--;
+      }, 1000)
+    }
   }
 }
 </script>
