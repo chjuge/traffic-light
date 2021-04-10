@@ -23,7 +23,7 @@ export default new Vuex.Store({
         },
 
         remainDuration: null,
-        prevLight: 'yellowLight',
+        prevLight: null,
         activeLight: null,
         nextLight: null,
     },
@@ -40,6 +40,8 @@ export default new Vuex.Store({
         setActiveLight(state) {
             state.activeLight = state.redLight.turnedOn ? 'redLight' :
                 state.yellowLight.turnedOn ? 'yellowLight' : 'greenLight';
+                // sessionStorage.setItem('activeLight', state.activeLight);
+
         },
         setPrevLight(state) {
             state.prevLight = state.activeLight ? state.activeLight : null
@@ -54,14 +56,23 @@ export default new Vuex.Store({
         setRemainDuration(state, light) {
             state.remainDuration = state[light].baseDuration;
         },
+        setRemainDurationFromStorage(state) {
+            state.remainDuration = sessionStorage.getItem('timer');
+        },
+
         timerCountDown(state) {
             setTimeout(function tick() {
+                
                 if (state.remainDuration > 1) {
                     setTimeout(tick, 1000);
                 }
                 state.remainDuration--;
+                sessionStorage.setItem('timer', state.remainDuration );
+                sessionStorage.setItem('activeLight', state.activeLight);
+                console.log(sessionStorage.getItem('timer'));
+                console.log(sessionStorage.getItem('activeLight'))
             }, 1000)
-        }
+        },
 
     },
     actions: {

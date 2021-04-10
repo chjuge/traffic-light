@@ -17,12 +17,17 @@ export default {
   name: 'Green',
 
   beforeCreate() {
+
       this.$store.commit('setPrevLight');
       this.$store.commit('switchOff');
       this.$store.commit('switchOn', 'greenLight');
-      this.$store.commit('setRemainDuration', 'greenLight');
       this.$store.commit('setActiveLight');
       this.$store.commit('setNextLight');
+
+      sessionStorage.getItem('activeLight') == 'greenLight' &&
+      sessionStorage.getItem('timer') > 0 ?
+      this.$store.commit('setRemainDurationFromStorage') :
+      this.$store.commit('setRemainDuration', 'greenLight');
   },
 
   mounted() {

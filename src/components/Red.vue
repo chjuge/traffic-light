@@ -17,12 +17,18 @@ export default {
   name: 'Red',
  
   beforeCreate() {
+
       this.$store.commit('setPrevLight');
       this.$store.commit('switchOff');
       this.$store.commit('switchOn', 'redLight');
-      this.$store.commit('setRemainDuration', 'redLight');
       this.$store.commit('setActiveLight');
       this.$store.commit('setNextLight');
+
+      sessionStorage.getItem('activeLight') == 'redLight' &&
+      sessionStorage.getItem('timer') > 0 ?
+      this.$store.commit('setRemainDurationFromStorage') :
+      this.$store.commit('setRemainDuration', 'redLight');
+
   },
 
   mounted() {
@@ -32,7 +38,7 @@ export default {
 
   updated() {
     if (this.timerDuration == 0) {
-      this.$router.push(this.nextPath)
+      this.$router.push(this.nextPath);
     }
   },
 
