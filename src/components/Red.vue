@@ -9,6 +9,7 @@
 
 <script>
 import BaseLight from './BaseLight.vue'
+import mixin from '../mixins/mixin.js'
 
 export default {
   components: { 
@@ -24,43 +25,12 @@ export default {
       this.$store.commit('setActiveLight');
       this.$store.commit('setNextLight');
 
-      sessionStorage.getItem('activeLight') == 'redLight' &&
-      sessionStorage.getItem('timer') > 0 ?
-      this.$store.commit('setRemainDurationFromStorage') :
-      this.$store.commit('setRemainDuration', 'redLight');
-
+      sessionStorage.getItem('activeLight') == 'redLight' 
+      && sessionStorage.getItem('timer') > 0 
+      ? this.$store.commit('setRemainDurationFromStorage') 
+      : this.$store.commit('setRemainDuration', 'redLight');
   },
 
-  mounted() {
-      this.$store.commit('timerCountDown');
-
-  },
-
-  updated() {
-    if (this.timerDuration == 0) {
-      this.$router.push(this.nextPath);
-    }
-  },
-
-  computed: {
-      red() {
-          return this.$store.getters.lightStatus('redLight')
-      },
-      green() {
-          return this.$store.getters.lightStatus('greenLight')
-      },
-      yellow() {
-          return this.$store.getters.lightStatus('yellowLight')
-      },
-      timerDuration() {
-          return this.$store.getters.duration
-      },
-      nextPath() {
-          return this.$store.getters.path
-      },
-      flicking() {
-        return this.timerDuration <= 3
-      }
-  }  
+  mixins: [mixin],
 }
 </script>

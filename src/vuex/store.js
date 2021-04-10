@@ -40,7 +40,6 @@ export default new Vuex.Store({
         setActiveLight(state) {
             state.activeLight = state.redLight.turnedOn ? 'redLight' :
                 state.yellowLight.turnedOn ? 'yellowLight' : 'greenLight';
-                // sessionStorage.setItem('activeLight', state.activeLight);
 
         },
         setPrevLight(state) {
@@ -69,8 +68,7 @@ export default new Vuex.Store({
                 state.remainDuration--;
                 sessionStorage.setItem('timer', state.remainDuration );
                 sessionStorage.setItem('activeLight', state.activeLight);
-                console.log(sessionStorage.getItem('timer'));
-                console.log(sessionStorage.getItem('activeLight'))
+
             }, 1000)
         },
 
