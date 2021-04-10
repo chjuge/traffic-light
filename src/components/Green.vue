@@ -15,6 +15,27 @@ export default {
       BaseLight 
       },
   name: 'Green',
+
+  beforeCreate() {
+      this.$store.commit('setPrevLight');
+      this.$store.commit('switchOff');
+      this.$store.commit('switchOn', 'greenLight');
+      this.$store.commit('setRemainDuration', 'greenLight');
+      this.$store.commit('setActiveLight');
+      this.$store.commit('setNextLight');
+  },
+
+  mounted() {
+      this.$store.commit('timerCountDown');
+
+  },
+
+  updated() {
+    if (this.timerDuration == 0) {
+      this.$router.push(this.nextPath)
+    }
+  },
+
   computed: {
       red() {
           return this.$store.getters.lightStatus('redLight')
@@ -26,7 +47,10 @@ export default {
           return this.$store.getters.lightStatus('yellowLight')
       },
       timerDuration() {
-          return this.$store.getters.duration('greenLight')
+          return this.$store.getters.duration
+      },
+      nextPath() {
+          return this.$store.getters.path
       }
   }  
 }
