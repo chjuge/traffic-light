@@ -1,6 +1,6 @@
 <template>
   <div class ="containter">
-    <base-light :class="{ 'red':red, 'red-off': !red }"/>
+    <base-light :class="{ 'red':red, 'red-off': !red, 'red-flickering': flicking }"/>
     <base-light :class="{ 'yellow':yellow, 'yellow-off': !yellow }"/>
     <base-light :class="{ 'green':green, 'green-off': !green }"/>
     <div>{{timerDuration}}</div>
@@ -51,6 +51,9 @@ export default {
       },
       nextPath() {
           return this.$store.getters.path
+      },
+      flicking() {
+        return this.timerDuration <= 3
       }
   }  
 }
